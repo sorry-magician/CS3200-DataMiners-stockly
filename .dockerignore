@@ -132,3 +132,7 @@ dist
 .flaskenv*
 !.env.project
 !.env.vault
+
+**/__pycache__
+**/*.pyc
+**/*.pyo

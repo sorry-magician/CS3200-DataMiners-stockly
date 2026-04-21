@@ -1,94 +1,123 @@
-# Idea borrowed from https://github.com/fsmosca/sample-streamlit-authenticator
-
-# This file has functions to add links to the left sidebar based on the user's role.
-
 import streamlit as st
 
 
-# ---- General ----------------------------------------------------------------
-
 def home_nav():
-    st.sidebar.page_link("Home.py", label="Home", icon="🏠")
+    st.sidebar.page_link("Home.py", label="Home")
 
 
-def about_page_nav():
-    st.sidebar.page_link("pages/30_About.py", label="About", icon="🧠")
+# ---- Role: store_owner (Maya Chen)
 
-
-# ---- Role: pol_strat_advisor ------------------------------------------------
-
-def pol_strat_home_nav():
+def store_owner_home_nav():
     st.sidebar.page_link(
-        "pages/00_Pol_Strat_Home.py", label="Political Strategist Home", icon="👤"
+        "pages/10_Store_Owner_Home.py",
+        label="Store Owner Home"
+    )
+
+def inventory_dashboard_nav():
+    st.sidebar.page_link(
+        "pages/11_Inventory_Dashboard.py",
+        label="Inventory Dashboard"
+    )
+
+def product_management_nav():
+    st.sidebar.page_link(
+        "pages/12_Product_Management.py",
+        label="Product Management"
+    )
+
+def overstock_analysis_nav():
+    st.sidebar.page_link(
+        "pages/13_Overstock_Analysis.py",
+        label="Overstock Analysis"
     )
 
 
-def world_bank_viz_nav():
+# ---- Role: inventory_manager (Jordan Patel)
+
+def inventory_manager_home_nav():
     st.sidebar.page_link(
-        "pages/01_World_Bank_Viz.py", label="World Bank Visualization", icon="🏦"
+        "pages/20_Inventory_Manager_Home.py",
+        label="Inventory Manager Home"
+    )
+
+def purchase_orders_nav():
+    st.sidebar.page_link(
+        "pages/20_Purchase_Orders.py",
+        label="Purchase Orders"
+    )
+
+def inventory_search_nav():
+    st.sidebar.page_link(
+        "pages/21_Inventory_Search.py",
+        label="Inventory Search"
+    )
+
+def stock_management_nav():
+    st.sidebar.page_link(
+        "pages/22_Stock_Management.py",
+        label="Stock Management"
     )
 
 
-def map_demo_nav():
-    st.sidebar.page_link("pages/02_Map_Demo.py", label="Map Demonstration", icon="🗺️")
+# ---- Role: analyst (Priya Nair)
 
-
-# ---- Role: usaid_worker -----------------------------------------------------
-
-def usaid_worker_home_nav():
+def analyst_home_nav():
     st.sidebar.page_link(
-        "pages/10_USAID_Worker_Home.py", label="USAID Worker Home", icon="🏠"
+        "pages/30_Analyst_Home.py",
+        label="Analyst Home"
+    )
+
+def revenue_dashboard_nav():
+    st.sidebar.page_link(
+        "pages/31_Revenue_Dashboard.py",
+        label="Revenue Dashboard"
+    )
+
+def product_performance_nav():
+    st.sidebar.page_link(
+        "pages/32_Product_Performance.py",
+        label="Product Performance"
+    )
+
+def supplier_analysis_nav():
+    st.sidebar.page_link(
+        "pages/33_Supplier_Analysis.py",
+        label="Supplier Analysis"
     )
 
 
-def ngo_directory_nav():
-    st.sidebar.page_link("pages/14_NGO_Directory.py", label="NGO Directory", icon="📁")
-
-
-def add_ngo_nav():
-    st.sidebar.page_link("pages/15_Add_NGO.py", label="Add New NGO", icon="➕")
-
-
-def prediction_nav():
-    st.sidebar.page_link(
-        "pages/11_Prediction.py", label="Regression Prediction", icon="📈"
-    )
-
-
-def api_test_nav():
-    st.sidebar.page_link("pages/12_API_Test.py", label="Test the API", icon="🛜")
-
-
-def classification_nav():
-    st.sidebar.page_link(
-        "pages/13_Classification.py", label="Classification Demo", icon="🌺"
-    )
-
-
-# ---- Role: administrator ----------------------------------------------------
+# ---- Role: administrator (Alex Torres)
 
 def admin_home_nav():
-    st.sidebar.page_link("pages/20_Admin_Home.py", label="System Admin", icon="🖥️")
-
-
-def ml_model_mgmt_nav():
     st.sidebar.page_link(
-        "pages/21_ML_Model_Mgmt.py", label="ML Model Management", icon="🏢"
+        "pages/40_Admin_Home.py",
+        label="Admin Home"
+    )
+
+def user_management_nav():
+    st.sidebar.page_link(
+        "pages/41_User_Management.py",
+        label="User Management"
+    )
+
+def audit_log_nav():
+    st.sidebar.page_link(
+        "pages/42_Audit_Log.py",
+        label="Audit Log"
+    )
+
+def system_config_nav():
+    st.sidebar.page_link(
+        "pages/43_System_Config.py",
+        label="System Config"
     )
 
 
-# ---- Sidebar assembly -------------------------------------------------------
+# ---- Sidebar assembly
 
 def SideBarLinks(show_home=False):
-    """
-    Renders sidebar navigation links based on the logged-in user's role.
-    The role is stored in st.session_state when the user logs in on Home.py.
-    """
-
-    # Logo appears at the top of the sidebar on every page
     st.sidebar.image("assets/logo.png", width=150)
 
-    # If no one is logged in, send them to the Home (login) page
     if "authenticated" not in st.session_state:
         st.session_state.authenticated = False
         st.switch_page("Home.py")
@@ -98,25 +127,29 @@ def SideBarLinks(show_home=False):
 
     if st.session_state["authenticated"]:
 
-        if st.session_state["role"] == "pol_strat_advisor":
-            pol_strat_home_nav()
-            world_bank_viz_nav()
-            map_demo_nav()
+        if st.session_state["role"] == "store_owner":
+            store_owner_home_nav()
+            inventory_dashboard_nav()
+            product_management_nav()
+            overstock_analysis_nav()
 
-        if st.session_state["role"] == "usaid_worker":
-            usaid_worker_home_nav()
-            ngo_directory_nav()
-            add_ngo_nav()
-            prediction_nav()
-            api_test_nav()
-            classification_nav()
+        if st.session_state["role"] == "inventory_manager":
+            inventory_manager_home_nav()
+            purchase_orders_nav()
+            inventory_search_nav()
+            stock_management_nav()
+
+        if st.session_state["role"] == "analyst":
+            analyst_home_nav()
+            revenue_dashboard_nav()
+            product_performance_nav()
+            supplier_analysis_nav()
 
         if st.session_state["role"] == "administrator":
             admin_home_nav()
-            ml_model_mgmt_nav()
-
-    # About link appears at the bottom for all roles
-    about_page_nav()
+            user_management_nav()
+            audit_log_nav()
+            system_config_nav()
 
     if st.session_state["authenticated"]:
         if st.sidebar.button("Logout"):
