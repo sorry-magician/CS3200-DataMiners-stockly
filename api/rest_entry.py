@@ -1,8 +1,11 @@
-from api.backend_app import app
-from backend.inventory.inventory import inventory
-from backend.analytics.analytics import analytics
+from flask import Flask
+from dotenv import load_dotenv
+import os
+import logging
 
-app.register_blueprint(inventory, url_prefix='/api')
+from backend.db_connection import init_app as init_db
+from backend.products.products import products
+from backend.inventory.inventory import inventory
 
 
 def create_app():
@@ -26,6 +29,5 @@ def create_app():
     app.logger.info("create_app(): registering blueprints")
     app.register_blueprint(products)
     app.register_blueprint(inventory)
-    app.register_blueprint(analytics)
 
     return app
