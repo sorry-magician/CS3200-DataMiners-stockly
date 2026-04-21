@@ -2,7 +2,11 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+<<<<<<< HEAD
       <module fileurl="file://$PROJECT_DIR$/.idea/CS3200-DataMiners-stockly.iml" filepath="$PROJECT_DIR$/.idea/CS3200-DataMiners-stockly.iml" />
+=======
+      <module fileurl="file://$PROJECT_DIR$/.idea/DataGripProjects2.iml" filepath="$PROJECT_DIR$/.idea/DataGripProjects2.iml" />
+>>>>>>> d1faa15c2da1e3fb4ad9070399be8f658ad6595d
     </modules>
   </component>
 </project>

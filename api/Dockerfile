@@ -9,8 +9,4 @@ COPY . .
 
 EXPOSE 4000
 
-ENV PYTHONPATH=/apicode
-
-# Run Python in unbuffered mode to ensure logs are immediately visible
-CMD ["python", "-um", "backend_app"]
-
+CMD ["python", "-u", "backend_app.py"]

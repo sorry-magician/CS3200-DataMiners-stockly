@@ -116,7 +116,7 @@ def system_config_nav():
 # ---- Sidebar assembly
 
 def SideBarLinks(show_home=False):
-    st.sidebar.image("assets/logo.png", width=150)
+    st.sidebar.markdown("## Stockly")
 
     if "authenticated" not in st.session_state:
         st.session_state.authenticated = False

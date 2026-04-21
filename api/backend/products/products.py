@@ -23,7 +23,7 @@ products = Blueprint('products', __name__)
 
 @products.route('/products', methods=['GET'])
 def get_all_products():
-    cursor = db.get_db().cursor()
+    cursor = get_db().cursor()
     query = '''
         SELECT  p.sku,
                 p.product_name,
@@ -62,8 +62,9 @@ def add_product():
     reorder_threshold = body['reorder_threshold']
     category_name     = body['category_name']
 
-    cursor = db.get_db().cursor()
-    query = '''
+    conn   = get_db()
+    cursor = conn.cursor()
+    query  = '''
         INSERT INTO Products
             (sku, product_name, description,
              unit_price, quantity_on_hand,
@@ -76,7 +77,7 @@ def add_product():
     cursor.execute(query, (sku, product_name, description,
                            unit_price, quantity_on_hand,
                            reorder_threshold, category_name))
-    db.get_db().commit()
+    conn.commit()
     return make_response(
         jsonify({'message': 'Product added successfully'}), 201
     )
@@ -97,7 +98,7 @@ def add_product():
 
 @products.route('/products/low-stock', methods=['GET'])
 def get_low_stock():
-    cursor = db.get_db().cursor()
+    cursor = get_db().cursor()
     query = '''
         SELECT  p.sku,
                 p.product_name,
@@ -133,7 +134,7 @@ def get_low_stock():
 
 @products.route('/products/overstock', methods=['GET'])
 def get_overstock():
-    cursor = db.get_db().cursor()
+    cursor = get_db().cursor()
     query = '''
         SELECT  p.sku,
                 p.product_name,
@@ -171,7 +172,7 @@ def get_overstock():
 
 @products.route('/categories', methods=['GET'])
 def get_categories():
-    cursor = db.get_db().cursor()
+    cursor = get_db().cursor()
     query = '''
         SELECT  category_id,
                 category_name
@@ -191,7 +192,7 @@ def get_categories():
 
 @products.route('/products/<sku>', methods=['GET'])
 def get_product(sku):
-    cursor = db.get_db().cursor()
+    cursor = get_db().cursor()
     query = '''
         SELECT  p.sku,
                 p.product_name,
@@ -224,15 +225,16 @@ def update_product(sku):
     unit_price        = body['unit_price']
     reorder_threshold = body['reorder_threshold']
 
-    cursor = db.get_db().cursor()
-    query = '''
+    conn   = get_db()
+    cursor = conn.cursor()
+    query  = '''
         UPDATE  Products
         SET     unit_price        = %s,
                 reorder_threshold = %s
         WHERE   sku = %s
     '''
     cursor.execute(query, (unit_price, reorder_threshold, sku))
-    db.get_db().commit()
+    conn.commit()
     return make_response(
         jsonify({'message': 'Product updated successfully'}), 200
     )
@@ -248,14 +250,15 @@ def update_product(sku):
 
 @products.route('/products/<sku>', methods=['DELETE'])
 def archive_product(sku):
-    cursor = db.get_db().cursor()
-    query = '''
+    conn   = get_db()
+    cursor = conn.cursor()
+    query  = '''
         UPDATE  Products
         SET     is_archived = TRUE
         WHERE   sku = %s
     '''
     cursor.execute(query, (sku,))
-    db.get_db().commit()
+    conn.commit()
     return make_response(
         jsonify({'message': 'Product archived successfully'}), 200
     )
