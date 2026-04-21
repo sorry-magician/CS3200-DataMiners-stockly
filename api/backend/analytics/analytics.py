@@ -1,17 +1,15 @@
 # analytics.py
 # Flask Blueprint — Analytics domain
 # Serves Priya Nair (Business Analyst) — Persona 3
-# Spencer | CS 3200 | Data Miners | Stockly
 
 
 from flask import Blueprint, request, jsonify, make_response
 from backend.db_connection import get_db
 
-# ------------------------------------------------
 # Register the Blueprint.
 # The url_prefix '/api' is set in __init__.py,
 # so every route here is accessible at /api/...
-# ------------------------------------------------
+
 analytics = Blueprint('analytics', __name__)
 
 
@@ -228,3 +226,4 @@ def get_supplier_lead_times():
     cursor.execute(query)
     data = cursor.fetchall()
     return make_response(jsonify(data), 200)
+

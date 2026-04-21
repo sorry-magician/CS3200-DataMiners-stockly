@@ -2,7 +2,6 @@
 # products.py
 # Flask Blueprint — Products & Categories domain
 # Serves Maya Chen (Store Owner) — Persona 1
-# Arnav Agarwal | CS 3200 | Data Miners | Stockly
 
 
 from flask import Blueprint, request, jsonify, make_response
