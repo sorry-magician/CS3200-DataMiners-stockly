@@ -1,9 +1,3 @@
-# 31_Revenue_Dashboard.py
-# Revenue trends and category performance dashboard
-# Serves Priya Nair — Business Analyst (Persona 3)
-# User Stories: Priya-1, Priya-2
-# Spencer | CS 3200 | Data Miners | Stockly
-
 import streamlit as st
 import requests
 import pandas as pd
@@ -16,7 +10,7 @@ if not st.session_state.get('authenticated'):
     st.warning('Please log in from the Home page first.')
     st.stop()
 
-API_BASE = 'http://api:4000/api'
+API_BASE = 'http://web-api:4000/api'
 
 st.title('📈 Revenue Dashboard')
 st.markdown('Track daily revenue trends and compare performance across product categories.')

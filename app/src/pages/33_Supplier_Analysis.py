@@ -1,9 +1,3 @@
-# 33_Supplier_Analysis.py
-# Supplier lead time and stock contribution analysis
-# Serves Priya Nair — Business Analyst (Persona 3)
-# User Story: Priya-6
-# Spencer | CS 3200 | Data Miners | Stockly
-
 import streamlit as st
 import requests
 import pandas as pd
@@ -16,7 +10,7 @@ if not st.session_state.get('authenticated'):
     st.warning('Please log in from the Home page first.')
     st.stop()
 
-API_BASE = 'http://api:4000/api'
+API_BASE = 'http://web-api:4000/api'
 
 st.title('🚚 Supplier Lead Time Analysis')
 st.markdown('Compare lead times across active suppliers and see how much of the catalog each one contributes.')

@@ -1,7 +1,3 @@
-# 30_Analyst_Home.py
-# Landing page for Priya Nair — Business Analyst (Persona 3)
-# Spencer | CS 3200 | Data Miners | Stockly
-
 import streamlit as st
 from modules.nav import SideBarLinks
 

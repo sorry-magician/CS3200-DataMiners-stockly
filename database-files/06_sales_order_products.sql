@@ -1,3 +1,5 @@
+USE stockly_db;
+
 -- 03_sales_order_products.sql
 -- Mock data for Sales_Order_Products bridge table
 -- 180 rows — each order has 2–5 line items

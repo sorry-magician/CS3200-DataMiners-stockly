@@ -4,7 +4,7 @@ from datetime import date, timedelta
 
 st.set_page_config(page_title='Purchase Orders — Stockly', layout='wide')
 
-API_BASE = 'http://api:4000'
+API_BASE = 'http://web-api:4000'
 
 if 'user' not in st.session_state:
     st.warning('Please log in from the Home page first.')

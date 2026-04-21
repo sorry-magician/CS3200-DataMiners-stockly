@@ -29,7 +29,7 @@ def get_revenue_trends():
     start_date = request.args.get('start_date')
     end_date   = request.args.get('end_date')
 
-    cursor = db.get_db().cursor()
+    cursor = get_db().cursor()
 
     # If both date params are supplied, filter
     # by the explicit range; otherwise default
@@ -78,7 +78,7 @@ def get_revenue_trends():
 
 @analytics.route('/analytics/category_performance', methods=['GET'])
 def get_category_performance():
-    cursor = db.get_db().cursor()
+    cursor = get_db().cursor()
     query = '''
         SELECT  c.category_name,
                 COUNT(DISTINCT so.order_id)              AS total_orders,
@@ -117,7 +117,7 @@ def get_category_performance():
 def get_sell_through():
     days = request.args.get('days', 90)
 
-    cursor = db.get_db().cursor()
+    cursor = get_db().cursor()
     query = '''
         SELECT  p.sku,
                 p.product_name,
@@ -164,7 +164,7 @@ def get_sell_through():
 
 @analytics.route('/analytics/turnover', methods=['GET'])
 def get_turnover():
-    cursor = db.get_db().cursor()
+    cursor = get_db().cursor()
     query = '''
         SELECT  p.sku,
                 p.product_name,
@@ -206,7 +206,7 @@ def get_turnover():
 
 @analytics.route('/analytics/supplier_lead_times', methods=['GET'])
 def get_supplier_lead_times():
-    cursor = db.get_db().cursor()
+    cursor = get_db().cursor()
     query = '''
         SELECT  s.supplier_name,
                 s.lead_time_days,
