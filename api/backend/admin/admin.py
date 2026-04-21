@@ -1,7 +1,6 @@
 # admin.py
 # Flask Blueprint — Admin domain
 # Serves Alex Torres (System Administrator)
-# CS 3200 | Data Miners | Stockly
 
 from flask import Blueprint, request, jsonify, make_response
 from backend.db_connection import get_db

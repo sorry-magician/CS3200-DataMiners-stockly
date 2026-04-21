@@ -42,7 +42,7 @@ def inventory_manager_home_nav():
 
 def purchase_orders_nav():
     st.sidebar.page_link(
-        "pages/20_Purchase_Orders.py",
+        "pages/22_Purchase_Orders.py",
         label="Purchase Orders"
     )
 
@@ -54,7 +54,7 @@ def inventory_search_nav():
 
 def stock_management_nav():
     st.sidebar.page_link(
-        "pages/22_Stock_Management.py",
+        "pages/23_Stock_Management.py",
         label="Stock Management"
     )
 
