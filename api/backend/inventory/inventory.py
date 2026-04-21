@@ -1,11 +1,11 @@
 from flask import Blueprint, request, jsonify, make_response
-from backend.db_connection import db
+from backend.db_connection import get_db
 
 inventory = Blueprint('inventory', __name__)
 
 @inventory.route('/purchase_orders', methods=['GET'])
 def get_all_purchase_orders():
-    cursor = db.get_db().cursor()
+    cursor = get_db().cursor()
     query = '''
         SELECT  po.po_id,
                 po.order_date,
@@ -33,7 +33,7 @@ def create_purchase_order():
     user_email             = body['user_email']
     items                  = body['items']   # list of {sku, quantity_ordered}
 
-    conn   = db.get_db()
+    conn   = get_db()
     cursor = conn.cursor()
 
     # Step 1 — Insert PO header
@@ -72,7 +72,7 @@ def create_purchase_order():
 
 @inventory.route('/purchase_orders/<int:po_id>', methods=['GET'])
 def get_purchase_order(po_id):
-    cursor = db.get_db().cursor()
+    cursor = get_db().cursor()
     query = '''
         SELECT  po.po_id,
                 po.order_date,
@@ -103,7 +103,7 @@ def update_po_status(po_id):
     body       = request.get_json()
     new_status = body['status']
 
-    conn   = db.get_db()
+    conn   = get_db()
     cursor = conn.cursor()
     query = '''
         UPDATE Purchase_Orders
@@ -119,7 +119,7 @@ def update_po_status(po_id):
 
 @inventory.route('/stock_adjustments', methods=['GET'])
 def get_stock_adjustments():
-    cursor     = db.get_db().cursor()
+    cursor     = get_db().cursor()
     sku_filter = request.args.get('sku')
 
     base_select = '''
@@ -155,7 +155,7 @@ def create_stock_adjustment():
     reason          = body['reason']
     user_email      = body['user_email']
 
-    conn   = db.get_db()
+    conn   = get_db()
     cursor = conn.cursor()
     query = '''
         INSERT INTO Stock_Adjustments
@@ -175,7 +175,7 @@ def create_stock_adjustment():
 
 @inventory.route('/inventory/search', methods=['GET'])
 def search_products():
-    cursor      = db.get_db().cursor()
+    cursor      = get_db().cursor()
     category_id = request.args.get('category_id')
     supplier_id = request.args.get('supplier_id')
 
@@ -219,7 +219,7 @@ def search_products():
 
 @inventory.route('/suppliers', methods=['GET'])
 def get_suppliers():
-    cursor = db.get_db().cursor()
+    cursor = get_db().cursor()
     query = '''
         SELECT  supplier_id,
                 supplier_name,
@@ -237,7 +237,7 @@ def get_suppliers():
 
 @inventory.route('/suppliers/<int:supplier_id>', methods=['DELETE'])
 def deactivate_supplier(supplier_id):
-    conn   = db.get_db()
+    conn   = get_db()
     cursor = conn.cursor()
     query = '''
         UPDATE Suppliers
