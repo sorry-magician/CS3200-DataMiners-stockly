@@ -6,6 +6,7 @@ import logging
 from backend.db_connection import init_app as init_db
 from backend.products.products import products
 from backend.inventory.inventory import inventory
+from backend.admin.admin import admin
 
 
 def create_app():
@@ -29,5 +30,6 @@ def create_app():
     app.logger.info("create_app(): registering blueprints")
     app.register_blueprint(products)
     app.register_blueprint(inventory)
+    app.register_blueprint(admin)
 
     return app
