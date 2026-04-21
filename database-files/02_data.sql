@@ -249,3 +249,24 @@ VALUES
  'Cosy midlayer pullover in anti-pill recycled polyester fleece.',
  64.99, 3, 15, FALSE, 10);  -- LOW STOCK (3 < 15)
 
+ -- SYSTEM CONFIG
+INSERT INTO System_Config (config_key, config_value, user_id) VALUES
+('low_stock_default', '10', 4),
+('currency', 'USD', 4),
+('timezone', 'America/New_York', 4),
+('company_name', 'Stockly Demo Store', 4),
+('reorder_alert_email', 'alerts@stockly.com', 4);
+
+-- AUDIT LOG
+INSERT INTO Audit_Log (action_type, table_name, record_ref, is_flagged, user_id) VALUES
+('INSERT', 'Products', 'APR-001', FALSE, 1),
+('UPDATE', 'Products', 'APR-001', FALSE, 1),
+('INSERT', 'Products', 'APR-047', FALSE, 2),
+('UPDATE', 'Stock_Adjustments', 'APR-022', TRUE, 2),
+('INSERT', 'Purchase_Orders', 'PO-001', FALSE, 2),
+('UPDATE', 'Purchase_Orders', 'PO-001', FALSE, 2),
+('INSERT', 'Users', 'jordan@stockly.com', FALSE, 4),
+('DELETE', 'Products', 'APR-007', TRUE, 4),
+('UPDATE', 'System_Config', 'low_stock_default', FALSE, 4),
+('INSERT', 'Sales_Orders', 'SO-001', FALSE, 1);
+
