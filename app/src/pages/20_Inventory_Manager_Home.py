@@ -7,7 +7,7 @@ if not st.session_state.get('authenticated'):
     st.stop()
 
 st.title('📦 Inventory Manager Portal')
-st.subheader(f'Welcome, {st.session_state["user"].get("full_name", "Jordan")}')
+st.subheader(f'Welcome, {st.session_state.get("first_name", "Jordan")}')
 st.caption('Manage purchase orders, track stock levels, and maintain supplier records.')
 st.divider()
 
