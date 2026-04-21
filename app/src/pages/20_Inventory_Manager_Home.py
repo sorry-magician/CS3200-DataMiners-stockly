@@ -2,7 +2,7 @@ import streamlit as st
 
 st.set_page_config(page_title='Inventory Manager — Stockly', layout='wide')
 
-if 'user' not in st.session_state:
+if not st.session_state.get('authenticated'):
     st.warning('Please log in from the Home page first.')
     st.stop()
 
