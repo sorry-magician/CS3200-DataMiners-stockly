@@ -3,61 +3,34 @@
 # Spencer | CS 3200 | Data Miners | Stockly
 
 import streamlit as st
+from modules.nav import SideBarLinks
 
-# ------------------------------------------------
-# Guard: redirect to Home if no user is logged in
-# ------------------------------------------------
-if 'user' not in st.session_state:
+st.set_page_config(
+    page_title = 'Analyst Home — Stockly',
+    page_icon  = '📊',
+    layout     = 'wide'
+)
+
+SideBarLinks()
+
+# Guard
+if not st.session_state.get('authenticated'):
     st.warning('Please log in from the Home page first.')
     st.stop()
 
-user = st.session_state['user']
-
-# ------------------------------------------------
-# Page config
-# ------------------------------------------------
-st.set_page_config(
-    page_title  = 'Analyst Home — Stockly',
-    page_icon   = '📊',
-    layout      = 'wide'
-)
-
-# ------------------------------------------------
-# Header
-# ------------------------------------------------
-st.title(f'Welcome, {user["full_name"]} 👋')
+st.title(f'Welcome, {st.session_state.get("first_name", "Priya")} 👋')
 st.subheader('Business Analyst Dashboard')
 st.markdown('---')
 
-st.markdown(
-    '''
-    Use the sidebar to navigate to your analytics tools.
-    As a **Business Analyst**, you have access to:
-    '''
-)
+st.markdown('Use the sidebar to navigate to your analytics tools. As a **Business Analyst**, you have access to:')
 
 col1, col2, col3 = st.columns(3)
 
 with col1:
-    st.info(
-        '**📈 Revenue Dashboard**\n\n'
-        'Track sales trends and revenue by category '
-        'over any date range.'
-    )
+    st.info('**📈 Revenue Dashboard**\n\nTrack sales trends and revenue by category over any date range.')
 
 with col2:
-    st.info(
-        '**🏷️ Product Performance**\n\n'
-        'View sell-through rates and inventory '
-        'turnover ratios per SKU.'
-    )
+    st.info('**🏷️ Product Performance**\n\nView sell-through rates and inventory turnover ratios per SKU.')
 
 with col3:
-    st.info(
-        '**🚚 Supplier Analysis**\n\n'
-        'Analyse supplier lead times and the stock '
-        'they contribute to the catalog.'
-    )
-
-st.markdown('---')
-st.caption(f'Logged in as: {user["email"]}  |  Role: {user["role"]}')
+    st.info('**🚚 Supplier Analysis**\n\nAnalyse supplier lead times and the stock they contribute to the catalog.')
