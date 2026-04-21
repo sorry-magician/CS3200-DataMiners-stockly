@@ -1,4 +1,8 @@
 import streamlit as st
+
+from modules.nav import SideBarLinks
+SideBarLinks()
+
 import requests
 
 st.set_page_config(page_title='Inventory Search — Stockly', layout='wide')

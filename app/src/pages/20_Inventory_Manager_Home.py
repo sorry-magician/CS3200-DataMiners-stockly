@@ -1,5 +1,8 @@
 import streamlit as st
 
+from modules.nav import SideBarLinks
+SideBarLinks()
+
 st.set_page_config(page_title='Inventory Manager — Stockly', layout='wide')
 
 if not st.session_state.get('authenticated'):

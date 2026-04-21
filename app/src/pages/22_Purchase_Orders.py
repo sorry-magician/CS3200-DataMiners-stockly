@@ -1,4 +1,8 @@
 import streamlit as st
+
+from modules.nav import SideBarLinks
+SideBarLinks()
+
 import requests
 from datetime import date, timedelta
 
