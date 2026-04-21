@@ -1,11 +1,10 @@
 import streamlit as st
-
 from modules.nav import SideBarLinks
+
+st.set_page_config(page_title='Inventory Search — Stockly', layout='wide')
 SideBarLinks()
 
 import requests
-
-st.set_page_config(page_title='Inventory Search — Stockly', layout='wide')
 
 API_BASE = 'http://web-api:4000'
 
@@ -13,7 +12,7 @@ if not st.session_state.get('authenticated'):
     st.warning('Please log in from the Home page first.')
     st.stop()
 
-st.title('🔍 Inventory Search & Filter')
+st.title('Inventory Search and Filter')
 st.caption(
     'Use the sidebar filters to narrow down the product catalog '
     'by category and/or supplier. Leave both set to "All" to see the full catalog.'
@@ -21,29 +20,29 @@ st.caption(
 st.divider()
 
 try:
-    cat_resp   = requests.get(f'{API_BASE}/api/categories')
+    cat_resp   = requests.get(f'{API_BASE}/categories')
     categories = cat_resp.json() if cat_resp.status_code == 200 else []
 except Exception:
     categories = []
 
 try:
-    sup_resp  = requests.get(f'{API_BASE}/api/suppliers')
+    sup_resp  = requests.get(f'{API_BASE}/suppliers')
     suppliers = sup_resp.json() if sup_resp.status_code == 200 else []
 except Exception:
     suppliers = []
 
 cat_options = {'All': None}
 cat_options.update(
-    {c['category_name']: c['category_id'] for c in categories}
+    {c[1]: c[0] for c in categories}
 )
 
 sup_options = {'All': None}
 sup_options.update(
-    {s['supplier_name']: s['supplier_id'] for s in suppliers}
+    {s[1]: s[0] for s in suppliers}
 )
 
 with st.sidebar:
-    st.header('🔧 Filters')
+    st.header('Filters')
     st.caption('Select one or both filters, then click Apply.')
 
     selected_cat_name = st.selectbox('Category', list(cat_options.keys()))
@@ -56,9 +55,9 @@ if clear_btn:
     st.info('Filters cleared. Select new filters and click Apply.')
 
 elif apply_btn:
-    params     = {}
-    cat_id     = cat_options[selected_cat_name]
-    sup_id     = sup_options[selected_sup_name]
+    params = {}
+    cat_id = cat_options[selected_cat_name]
+    sup_id = sup_options[selected_sup_name]
 
     if cat_id is not None:
         params['category_id'] = cat_id
@@ -78,7 +77,7 @@ elif apply_btn:
 
     try:
         search_resp = requests.get(
-            f'{API_BASE}/api/inventory/search', params=params
+            f'{API_BASE}/inventory/search', params=params
         )
         if search_resp.status_code == 200:
             results = search_resp.json()
@@ -86,17 +85,15 @@ elif apply_btn:
             st.subheader(f'Results — {len(results)} product(s) found')
 
             if results:
-                # Highlight low-stock rows so Jordan can spot them easily
                 st.dataframe(results, use_container_width=True)
 
-                # Quick summary metrics below the table
                 low_stock_count = sum(
                     1 for r in results
-                    if r.get('quantity_on_hand', 0) < r.get('reorder_threshold', 0)
+                    if r[2] < r[3]
                 )
                 out_of_stock_count = sum(
                     1 for r in results
-                    if r.get('quantity_on_hand', 0) == 0
+                    if r[2] == 0
                 )
 
                 st.divider()
@@ -118,5 +115,5 @@ elif apply_btn:
 else:
     st.info(
         'Select a Category and/or Supplier in the sidebar, '
-        'then click **Apply Filters** to see matching products.'
+        'then click Apply Filters to see matching products.'
     )
