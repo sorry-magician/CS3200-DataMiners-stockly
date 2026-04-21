@@ -10,7 +10,7 @@ st.title('Overstock Analysis')
 st.write('---')
 st.write('Products with high inventory but low sales in the last 90 days.')
 
-API_BASE = 'http://web-api:4000'
+API_BASE = 'http://localhost:4000'
 
 try:
     response  = requests.get(f'{API_BASE}/products/overstock')

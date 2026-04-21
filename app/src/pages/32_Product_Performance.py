@@ -1,9 +1,3 @@
-# 32_Product_Performance.py
-# Sell-through rate and inventory turnover analysis
-# Serves Priya Nair — Business Analyst (Persona 3)
-# User Stories: Priya-3, Priya-4
-# Spencer | CS 3200 | Data Miners | Stockly
-
 import streamlit as st
 import requests
 import pandas as pd
@@ -35,6 +29,9 @@ if st.button('Load Sell-Through Data', type='primary'):
             st_data = response.json()
             if st_data:
                 df_st = pd.DataFrame(st_data)
+                df_st['sell_through_rate_pct'] = pd.to_numeric(df_st['sell_through_rate_pct'])
+                df_st['units_sold'] = pd.to_numeric(df_st['units_sold'])
+                df_st['current_stock'] = pd.to_numeric(df_st['current_stock'])
 
                 s1, s2, s3 = st.columns(3)
                 with s1:
@@ -73,6 +70,9 @@ if st.button('Load Turnover Data', type='primary'):
             to_data = response.json()
             if to_data:
                 df_to = pd.DataFrame(to_data)
+                df_to['turnover_ratio'] = pd.to_numeric(df_to['turnover_ratio'])
+                df_to['total_units_sold'] = pd.to_numeric(df_to['total_units_sold'])
+                df_to['quantity_on_hand'] = pd.to_numeric(df_to['quantity_on_hand'])
 
                 t1, t2 = st.columns(2)
                 with t1:

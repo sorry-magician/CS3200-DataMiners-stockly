@@ -1,9 +1,3 @@
-# 33_Supplier_Analysis.py
-# Supplier lead time and stock contribution analysis
-# Serves Priya Nair — Business Analyst (Persona 3)
-# User Story: Priya-6
-# Spencer | CS 3200 | Data Miners | Stockly
-
 import streamlit as st
 import requests
 import pandas as pd
@@ -29,6 +23,10 @@ if st.button('Load Supplier Data', type='primary'):
             data = response.json()
             if data:
                 df = pd.DataFrame(data)
+                df['lead_time_days'] = pd.to_numeric(df['lead_time_days'])
+                df['products_supplied'] = pd.to_numeric(df['products_supplied'])
+                df['total_stock_supplied'] = pd.to_numeric(df['total_stock_supplied'])
+                df['avg_stock_per_product'] = pd.to_numeric(df['avg_stock_per_product'])
 
                 c1, c2, c3 = st.columns(3)
                 with c1:

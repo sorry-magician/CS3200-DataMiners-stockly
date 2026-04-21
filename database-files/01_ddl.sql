@@ -74,6 +74,8 @@ CREATE TABLE Product_Suppliers (
 CREATE TABLE Sales_Orders (
     order_id   INT      AUTO_INCREMENT PRIMARY KEY,
     order_date DATE     NOT NULL,
+    status     VARCHAR(20)  NOT NULL DEFAULT 'completed',
+    notes      TEXT         NULL,
     user_id    INT      NOT NULL,
     CONSTRAINT fk_so_user FOREIGN KEY (user_id)
         REFERENCES Users(user_id)

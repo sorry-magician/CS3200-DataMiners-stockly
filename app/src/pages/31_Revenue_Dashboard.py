@@ -1,9 +1,3 @@
-# 31_Revenue_Dashboard.py
-# Revenue trends and category performance dashboard
-# Serves Priya Nair — Business Analyst (Persona 3)
-# User Stories: Priya-1, Priya-2
-# Spencer | CS 3200 | Data Miners | Stockly
-
 import streamlit as st
 import requests
 import pandas as pd
@@ -44,6 +38,9 @@ if st.button('Load Revenue Data', type='primary'):
             if revenue_data:
                 df = pd.DataFrame(revenue_data)
                 df['order_date'] = pd.to_datetime(df['order_date'])
+                df['total_revenue'] = pd.to_numeric(df['total_revenue'])
+                df['total_orders'] = pd.to_numeric(df['total_orders'])
+                df['total_units_sold'] = pd.to_numeric(df['total_units_sold'])
                 df = df.sort_values('order_date')
 
                 k1, k2, k3 = st.columns(3)

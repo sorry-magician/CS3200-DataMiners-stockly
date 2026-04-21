@@ -10,7 +10,7 @@ st.title('Audit Log')
 st.write('---')
 st.write('View a complete history of all changes made to the system.')
 
-API_BASE = 'http://web-api:4000'
+API_BASE = 'http://localhost:4000'
 
 # ── Filters 
 col1, col2 = st.columns(2)
