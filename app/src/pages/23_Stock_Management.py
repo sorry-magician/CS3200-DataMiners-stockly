@@ -3,7 +3,7 @@ import requests
 
 st.set_page_config(page_title='Stock Management — Stockly', layout='wide')
 
-API_BASE = 'http://api:4000'
+API_BASE = 'http://web-api:4000'
 
 if not st.session_state.get('authenticated'):
     st.warning('Please log in from the Home page first.')

@@ -7,7 +7,38 @@ INSERT INTO Users (full_name, email, role, is_active) VALUES
 ('Maya Chen',    'maya@stockly.com',    'manager', TRUE),
 ('Jordan Patel', 'jordan@stockly.com',  'editor',  TRUE),
 ('Priya Nair',   'priya@stockly.com',   'viewer',  TRUE),
-('Alex Torres',  'alex@stockly.com',    'admin',   TRUE);
+('Alex Torres',  'alex@stockly.com',    'admin',   TRUE),
+('Customer5',  'customer5@example.com',  'viewer', TRUE),
+('Customer6',  'customer6@example.com',  'viewer', TRUE),
+('Customer7',  'customer7@example.com',  'viewer', TRUE),
+('Customer8',  'customer8@example.com',  'viewer', TRUE),
+('Customer9',  'customer9@example.com',  'viewer', TRUE),
+('Customer10', 'customer10@example.com', 'viewer', TRUE),
+('Customer11', 'customer11@example.com', 'viewer', TRUE),
+('Customer12', 'customer12@example.com', 'viewer', TRUE),
+('Customer13', 'customer13@example.com', 'viewer', TRUE),
+('Customer14', 'customer14@example.com', 'viewer', TRUE),
+('Customer15', 'customer15@example.com', 'viewer', TRUE),
+('Customer16', 'customer16@example.com', 'viewer', TRUE),
+('Customer17', 'customer17@example.com', 'viewer', TRUE),
+('Customer18', 'customer18@example.com', 'viewer', TRUE),
+('Customer19', 'customer19@example.com', 'viewer', TRUE),
+('Customer20', 'customer20@example.com', 'viewer', TRUE),
+('Customer21', 'customer21@example.com', 'viewer', TRUE),
+('Customer22', 'customer22@example.com', 'viewer', TRUE),
+('Customer23', 'customer23@example.com', 'viewer', TRUE),
+('Customer24', 'customer24@example.com', 'viewer', TRUE),
+('Customer25', 'customer25@example.com', 'viewer', TRUE),
+('Customer26', 'customer26@example.com', 'viewer', TRUE),
+('Customer27', 'customer27@example.com', 'viewer', TRUE),
+('Customer28', 'customer28@example.com', 'viewer', TRUE),
+('Customer29', 'customer29@example.com', 'viewer', TRUE),
+('Customer30', 'customer30@example.com', 'viewer', TRUE),
+('Customer31', 'customer31@example.com', 'viewer', TRUE),
+('Customer32', 'customer32@example.com', 'viewer', TRUE),
+('Customer33', 'customer33@example.com', 'viewer', TRUE),
+('Customer34', 'customer34@example.com', 'viewer', TRUE),
+('Customer35', 'customer35@example.com', 'viewer', TRUE);
 
 -- CATEGORIES (10 rows)
 -- Inserted in order; category_id auto-assigns 1 through 10
@@ -269,4 +300,3 @@ INSERT INTO Audit_Log (action_type, table_name, record_ref, is_flagged, user_id)
 ('DELETE', 'Products', 'APR-007', TRUE, 4),
 ('UPDATE', 'System_Config', 'low_stock_default', FALSE, 4),
 ('INSERT', 'Sales_Orders', 'SO-001', FALSE, 1);
-

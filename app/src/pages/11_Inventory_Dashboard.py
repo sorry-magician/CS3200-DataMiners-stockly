@@ -8,7 +8,7 @@ SideBarLinks()
 st.title('Inventory Dashboard')
 st.write('---')
 
-API_BASE = 'http://web-api:4000'
+API_BASE = 'http://localhost:4000'
 
 # ── Fetch all products
 try:

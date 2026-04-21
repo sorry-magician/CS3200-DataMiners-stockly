@@ -1,3 +1,5 @@
+USE stockly_db;
+
 -- 02_sales_orders.sql
 -- Mock data for Sales_Orders table
 -- 60 rows spread across April 2024 – April 2025

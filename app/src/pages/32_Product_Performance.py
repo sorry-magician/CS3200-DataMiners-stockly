@@ -1,9 +1,3 @@
-# 32_Product_Performance.py
-# Sell-through rate and inventory turnover analysis
-# Serves Priya Nair — Business Analyst (Persona 3)
-# User Stories: Priya-3, Priya-4
-# Spencer | CS 3200 | Data Miners | Stockly
-
 import streamlit as st
 import requests
 import pandas as pd
@@ -16,7 +10,7 @@ if not st.session_state.get('authenticated'):
     st.warning('Please log in from the Home page first.')
     st.stop()
 
-API_BASE = 'http://api:4000/api'
+API_BASE = 'http://web-api:4000/api'
 
 st.title('🏷️ Product Performance')
 st.markdown('Analyse sell-through rates and inventory turnover ratios to identify your best and worst performers.')
