@@ -9,7 +9,6 @@ from backend.db_connection import get_db
 # Register the Blueprint.
 # The url_prefix '/api' is set in __init__.py,
 # so every route here is accessible at /api/...
-
 analytics = Blueprint('analytics', __name__)
 
 
@@ -27,7 +26,7 @@ def get_revenue_trends():
     start_date = request.args.get('start_date')
     end_date   = request.args.get('end_date')
 
-    cursor = get_db().cursor()
+    cursor = get_db().cursor(dictionary=True)
 
     # If both date params are supplied, filter
     # by the explicit range; otherwise default
@@ -76,7 +75,7 @@ def get_revenue_trends():
 
 @analytics.route('/analytics/category_performance', methods=['GET'])
 def get_category_performance():
-    cursor = get_db().cursor()
+    cursor = get_db().cursor(dictionary=True)
     query = '''
         SELECT  c.category_name,
                 COUNT(DISTINCT so.order_id)              AS total_orders,
@@ -115,7 +114,7 @@ def get_category_performance():
 def get_sell_through():
     days = request.args.get('days', 90)
 
-    cursor = get_db().cursor()
+    cursor = get_db().cursor(dictionary=True)
     query = '''
         SELECT  p.sku,
                 p.product_name,
@@ -162,7 +161,7 @@ def get_sell_through():
 
 @analytics.route('/analytics/turnover', methods=['GET'])
 def get_turnover():
-    cursor = get_db().cursor()
+    cursor = get_db().cursor(dictionary=True)
     query = '''
         SELECT  p.sku,
                 p.product_name,
@@ -204,7 +203,7 @@ def get_turnover():
 
 @analytics.route('/analytics/supplier_lead_times', methods=['GET'])
 def get_supplier_lead_times():
-    cursor = get_db().cursor()
+    cursor = get_db().cursor(dictionary=True)
     query = '''
         SELECT  s.supplier_name,
                 s.lead_time_days,
@@ -226,4 +225,3 @@ def get_supplier_lead_times():
     cursor.execute(query)
     data = cursor.fetchall()
     return make_response(jsonify(data), 200)
-

@@ -10,7 +10,7 @@ if not st.session_state.get('authenticated'):
     st.warning('Please log in from the Home page first.')
     st.stop()
 
-API_BASE = 'http://web-api:4000/api'
+API_BASE = 'http://api:4000/api'
 
 st.title('📈 Revenue Dashboard')
 st.markdown('Track daily revenue trends and compare performance across product categories.')
@@ -38,6 +38,9 @@ if st.button('Load Revenue Data', type='primary'):
             if revenue_data:
                 df = pd.DataFrame(revenue_data)
                 df['order_date'] = pd.to_datetime(df['order_date'])
+                df['total_revenue'] = pd.to_numeric(df['total_revenue'])
+                df['total_orders'] = pd.to_numeric(df['total_orders'])
+                df['total_units_sold'] = pd.to_numeric(df['total_units_sold'])
                 df = df.sort_values('order_date')
 
                 k1, k2, k3 = st.columns(3)
