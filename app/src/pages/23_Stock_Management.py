@@ -36,7 +36,7 @@ with tab1:
         'Use a negative number for stock that is being removed (e.g. damaged units).'
     )
 
-    with st.form('stock_adj_form', clear_on_submit=True):
+    with st.form('tab1_stock_adj_form', clear_on_submit=True):
         col_left, col_right = st.columns(2)
 
         with col_left:
@@ -95,72 +95,6 @@ with tab1:
             except Exception as e:
                 st.error(f'API connection error: {e}')
 
-
-with tab1:
-    st.subheader('Log a Manual Stock Adjustment')
-    st.caption(
-        'Record any quantity change with a documented reason. '
-        'Use a negative number for stock that is being removed (e.g. damaged units).'
-    )
-
-    with st.form('stock_adj_form', clear_on_submit=True):
-        col_left, col_right = st.columns(2)
-
-        with col_left:
-            sku             = st.text_input('Product SKU *', placeholder='APR-001')
-            adjustment_type = st.selectbox(
-                'Adjustment Type',
-                ['damaged', 'correction']
-            )
-
-        with col_right:
-            quantity_delta = st.number_input(
-                'Quantity Change *',
-                step=1,
-                value=-1,
-                help='Negative = stock removed, Positive = stock added'
-            )
-            reason = st.text_area(
-                'Reason for Adjustment *',
-                placeholder='e.g. Water damage found during storage check',
-                height=100
-            )
-
-        adj_submitted = st.form_submit_button(
-            'Save Adjustment', type='primary'
-        )
-
-    if adj_submitted:
-        if not sku.strip():
-            st.error('SKU is required.')
-        elif not reason.strip():
-            st.error('A reason is required for every adjustment.')
-        else:
-            payload = {
-                'sku':             sku.strip().upper(),
-                'quantity_delta':  int(quantity_delta),
-                'adjustment_type': adjustment_type,
-                'reason':          reason.strip(),
-                'user_email':      user_email
-            }
-            try:
-                resp = requests.post(
-                    f'{API_BASE}/api/stock_adjustments', json=payload
-                )
-                if resp.status_code == 201:
-                    st.success(
-                        f'Stock adjustment logged for **{sku.strip().upper()}**. '
-                        f'Verify in DataGrip: '
-                        f'`SELECT * FROM Stock_Adjustments ORDER BY adjustment_id DESC LIMIT 5;`'
-                    )
-                else:
-                    st.error(
-                        f'Failed to log adjustment. '
-                        f'Ensure the SKU exists in the Products table. '
-                        f'(HTTP {resp.status_code})'
-                    )
-            except Exception as e:
-                st.error(f'API connection error: {e}')
 
 with tab2:
     st.subheader('Update Purchase Order Status')
