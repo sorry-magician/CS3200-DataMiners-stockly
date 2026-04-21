@@ -1,11 +1,7 @@
-from flask import Flask
-from dotenv import load_dotenv
-import os
-import logging
-
-from backend.db_connection import init_app as init_db
-from backend.products.products import products
+from api.backend_app import app
 from backend.inventory.inventory import inventory
+
+app.register_blueprint(inventory, url_prefix='/api')
 
 
 def create_app():
