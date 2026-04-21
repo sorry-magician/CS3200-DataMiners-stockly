@@ -9,7 +9,7 @@ st.set_page_config(page_title='Inventory Search — Stockly', layout='wide')
 
 API_BASE = 'http://web-api:4000'
 
-if 'user' not in st.session_state:
+if not st.session_state.get('authenticated'):
     st.warning('Please log in from the Home page first.')
     st.stop()
 
