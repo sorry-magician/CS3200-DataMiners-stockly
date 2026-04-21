@@ -1,4 +1,4 @@
-from backend.rest_entry import create_app
+from api.rest_entry import create_app
 
 app = create_app()
 

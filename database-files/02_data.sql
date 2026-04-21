@@ -1,3 +1,14 @@
+USE stockly_db;
+
+-- USERS
+-- Must be inserted first — referenced by FK in multiple tables
+
+INSERT INTO Users (full_name, email, role, is_active) VALUES
+('Maya Chen',    'maya@stockly.com',    'manager', TRUE),
+('Jordan Patel', 'jordan@stockly.com',  'editor',  TRUE),
+('Priya Nair',   'priya@stockly.com',   'viewer',  TRUE),
+('Alex Torres',  'alex@stockly.com',    'admin',   TRUE);
+
 -- CATEGORIES (10 rows)
 -- Inserted in order; category_id auto-assigns 1 through 10
 
