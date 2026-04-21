@@ -8,10 +8,10 @@
 - Spencer Li — li.sp@northeastern.edu
 
 ## Demo Video
-[INSERT YOUTUBE LINK HERE]
+https://youtu.be/zcLiPIlyVFg
 
 ## GitHub Repository
-[INSERT GITHUB REPO LINK HERE]
+https://github.com/sorry-magician/CS3200-DataMiners-stockly.git
 
 ## Project Overview
 Stockly is an inventory management platform built for small e-commerce
